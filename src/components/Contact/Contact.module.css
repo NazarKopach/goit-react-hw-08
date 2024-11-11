@@ -1,0 +1,21 @@
+.div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.name {
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.button {
+  width: 80px;
+  height: 30px;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.icon {
+  margin: 0 10px auto 10px;
+}
