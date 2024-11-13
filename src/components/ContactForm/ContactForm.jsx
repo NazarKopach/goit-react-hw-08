@@ -3,8 +3,8 @@ import { addProfileSchema } from "../../utils/schemas";
 import styles from "./ContactsForm.module.css";
 import { nanoid } from "nanoid";
 import { useSelector, useDispatch } from "react-redux";
-import { addContact } from "../../redux/contactsOps";
-import { selectContacts } from "../../redux/contactsSlice";
+import { addContact } from "../../redux/contacts/operations";
+import { selectContacts } from "../../redux/contacts/selectors";
 
 const initialValues = {
   name: "",
@@ -32,45 +32,47 @@ const ContactForm = () => {
   };
 
   return (
-    <Formik
-      initialValues={initialValues}
-      validationSchema={addProfileSchema}
-      onSubmit={handleSubmit}
-    >
-      <Form className={styles.form}>
-        <label className={styles.label}>
-          <span>Name: </span>
-          <Field
-            type="text"
-            name="name"
-            className={styles.input}
-            placeholder="Name"
-          />
-          <ErrorMessage
-            className={styles.ErrorMessage}
-            name="name"
-            component="span"
-          />
-        </label>
-        <label className={styles.label}>
-          <span>Number: </span>
-          <Field
-            className={styles.input}
-            name="number"
-            type="tel"
-            placeholder="+380*******"
-          />
-          <ErrorMessage
-            className={styles.ErrorMessage}
-            name="number"
-            component="span"
-          />
-        </label>
-        <button className={styles.button} type="submit">
-          Add profile
-        </button>
-      </Form>
-    </Formik>
+    <div className={styles.contact_form_div}>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={addProfileSchema}
+        onSubmit={handleSubmit}
+      >
+        <Form className={styles.form}>
+          <label className={styles.label}>
+            <span>Name: </span>
+            <Field
+              type="text"
+              name="name"
+              className={styles.input}
+              placeholder="Name"
+            />
+            <ErrorMessage
+              className={styles.errorMessage}
+              name="name"
+              component="span"
+            />
+          </label>
+          <label className={styles.label}>
+            <span>Number: </span>
+            <Field
+              className={styles.input}
+              name="number"
+              type="tel"
+              placeholder="+380*******"
+            />
+            <ErrorMessage
+              className={styles.errorMessage}
+              name="number"
+              component="span"
+            />
+          </label>
+          <button className={styles.button} type="submit">
+            Add profile
+          </button>
+        </Form>
+      </Formik>
+    </div>
   );
 };
 
