@@ -30,7 +30,10 @@ function App() {
         <Layout />
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/register" element={<RegistrationPage />} />
+          <Route
+            path="/register"
+            element={<RestrictedRoute component={<RegistrationPage />} />}
+          />
           <Route
             path="/login"
             element={<RestrictedRoute component={<LoginPage />} />}
