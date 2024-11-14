@@ -14,6 +14,8 @@ const initialValues = {
 const ContactForm = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
+  const isLoading = useSelector((state) => state.contacts.loading);
+  const error = useSelector((state) => state.contacts.error);
 
   const handleSubmit = (values, actions) => {
     const duplicate = contacts.some(
@@ -33,6 +35,7 @@ const ContactForm = () => {
 
   return (
     <div className={styles.contact_form_div}>
+      {error && <p className={styles.errorText}>Error: {error}</p>}
       <Formik
         initialValues={initialValues}
         validationSchema={addProfileSchema}
@@ -67,8 +70,8 @@ const ContactForm = () => {
               component="span"
             />
           </label>
-          <button className={styles.button} type="submit">
-            Add profile
+          <button className={styles.button} type="submit" disabled={isLoading}>
+            {isLoading ? "Adding..." : "Add profile"}
           </button>
         </Form>
       </Formik>

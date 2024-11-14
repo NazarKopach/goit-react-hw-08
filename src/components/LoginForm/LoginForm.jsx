@@ -1,6 +1,6 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { LoginUserSchema } from "../../utils/schemas";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { apiLoginUser } from "../../redux/auth/operations";
 import style from "./LoginForm.module.css";
 
@@ -11,6 +11,8 @@ const INITIAL_VALUES = {
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
+  const isLoading = useSelector((state) => state.auth.isLoading);
+  const error = useSelector((state) => state.auth.error);
 
   const handleSubmit = (values, actions) => {
     dispatch(apiLoginUser(values));
@@ -19,6 +21,7 @@ export const LoginForm = () => {
 
   return (
     <div className={style.login_form_div}>
+      {error && <p className={style.errorText}>Error: {error}</p>}
       <Formik
         initialValues={INITIAL_VALUES}
         validationSchema={LoginUserSchema}
@@ -54,7 +57,7 @@ export const LoginForm = () => {
             />
           </label>
           <button className={style.button} type="submit">
-            Sign In
+            {isLoading ? "Signing in..." : "Sign In"}
           </button>
         </Form>
       </Formik>
