@@ -12,7 +12,6 @@ const INITIAL_VALUES = {
 export const LoginForm = () => {
   const dispatch = useDispatch();
   const isLoading = useSelector((state) => state.auth.isLoading);
-  const error = useSelector((state) => state.auth.error);
 
   const handleSubmit = (values, actions) => {
     dispatch(apiLoginUser(values));
@@ -21,7 +20,6 @@ export const LoginForm = () => {
 
   return (
     <div className={style.login_form_div}>
-      {error && <p className={style.errorText}>Error: {error}</p>}
       <Formik
         initialValues={INITIAL_VALUES}
         validationSchema={LoginUserSchema}
