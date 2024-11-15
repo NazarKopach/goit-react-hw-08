@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUserIsRefreshing } from "./redux/auth/selectors";
-import { Suspense, useEffect } from "react";
+import { useEffect } from "react";
 import { apiGetCurrentUser } from "./redux/auth/operations";
 import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute";
 import { RestrictedRoute } from "./components/RestrictedRoute/RestrictedRoute";
@@ -26,8 +26,7 @@ function App() {
 
   return (
     <div>
-      <Suspense fallback={<div>Loading...</div>}>
-        <Layout />
+      <Layout>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route
@@ -43,7 +42,7 @@ function App() {
             element={<PrivateRoute component={<ContactsPage />} />}
           />
         </Routes>
-      </Suspense>
+      </Layout>
     </div>
   );
 }

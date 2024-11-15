@@ -53,8 +53,6 @@ export const apiGetCurrentUser = createAsyncThunk(
       setToken(token);
       const { data } = await authInstance.get("/users/current");
 
-      console.log("data: ", data);
-
       return data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
@@ -69,7 +67,6 @@ export const apiLogoutUser = createAsyncThunk(
       const { data } = await authInstance.post("/users/logout");
 
       clearToken();
-      console.log("data: ", data);
 
       return data;
     } catch (error) {
